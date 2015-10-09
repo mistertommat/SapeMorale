@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="server=localhost;user id=sapemorale;password=sapemorale;persistsecurityinfo=True;database=test" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="c:\\Projects\\SapeMorale\\SapeMorale\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="LocalMySqlServer-Web.config Connection String" description="LocalMySqlServer Connection String used in web.config by the application to access the database." defaultValue="" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="c:\\Projects\\SapeMorale\\SapeMorale\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LocalMySqlServer']/@connectionString" />
+  </parameter>
+  <parameter name="testEntities-Web.config Connection String" description="testEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/MoraleStats.csdl|res://*/MoraleStats.ssdl|res://*/MoraleStats.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=localhost;user id=sapemorale;password=sapemorale;persistsecurityinfo=True;database=test&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="c:\\Projects\\SapeMorale\\SapeMorale\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='testEntities']/@connectionString" />
+  </parameter>
+  <parameter name="SapeMorale.IdentityMySQL.MySqlHistoryContext-Web.config Connection String" description="SapeMorale.IdentityMySQL.MySqlHistoryContext Connection String used in web.config by the application to access the database." defaultValue="SapeMorale.IdentityMySQL.MySqlHistoryContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="c:\\Projects\\SapeMorale\\SapeMorale\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SapeMorale.IdentityMySQL.MySqlHistoryContext']/@connectionString" />
+  </parameter>
+</parameters>

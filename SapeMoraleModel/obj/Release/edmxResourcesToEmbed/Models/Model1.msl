@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SapeMoraleModelStoreContainer" CdmEntityContainer="testEntities">
+    <EntitySetMapping Name="morale_stats">
+      <EntityTypeMapping TypeName="SapeMoraleModel.morale_stats">
+        <MappingFragment StoreEntitySet="morale_stats">
+          <ScalarProperty Name="MORALE" ColumnName="MORALE" />
+          <ScalarProperty Name="COUNT" ColumnName="COUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

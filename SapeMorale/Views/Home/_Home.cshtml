@@ -1,0 +1,272 @@
+﻿<!-- ko with: home -->
+@*<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>*@
+<script>
+    $(function () {
+
+        if ($('hdnPageMode').val() == 'GetFingerprint')
+        {
+            $.ajax({
+                url: "/Home/GetMorale",
+                type: "GET",
+                data: { fingerprint: fingerPrint },
+                beforeSend: function () {
+                    
+                }
+            }).done(function (returnedJSON) {
+                
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $('hdnPageMode').val() = returnedJSON.morale;
+                }                
+            });
+        }
+
+        switch ($('#hdnUserMorale').val()) {
+            case "H":
+                $('#imgHigh').addClass("highlight-icon");
+                break;
+            case "MH":
+                $('#imgHighish').addClass("highlight-icon");
+                break;
+            case "M":
+                $('#imgMedium').addClass("highlight-icon");
+                break;
+            case "L":
+                $('#imgLow').addClass("highlight-icon");
+                break;
+            case "VL":
+                $('#imgVeryLow').addClass("highlight-icon");
+                break;
+        }
+
+        function hideAllAck() {
+            $("#ackHigh").hide();
+            $("#ackHighish").hide();
+            $("#ackMedium").hide();
+            $("#ackLow").hide();
+            $("#ackVeryLow").hide();
+            $('#imgHigh').removeClass("highlight-icon");
+            $('#imgHighish').removeClass("highlight-icon");
+            $('#imgMedium').removeClass("highlight-icon");
+            $('#imgLow').removeClass("highlight-icon");
+            $('#imgVeryLow').removeClass("highlight-icon");
+        }
+
+        $(".tip-right").tooltip({ placement: 'right' });
+
+        $('#imgHigh').click(function (e) {
+            $('#imgHigh').addClass("hover-glow");
+            hideAllAck();
+            var fingerPrint = new Fingerprint().get();
+
+            $.ajax({
+                url: "/Home/SubmitHigh",
+                type: "POST",
+                data: { fingerprint: fingerPrint },
+                beforeSend: function () {
+                    $("#busyHigh").show();                    
+                }
+            }).done(function (returnedJSON) {
+                $("#busyHigh").hide();
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $("#ackHigh").show();
+                    $("#failHigh").hide();
+                    $('#imgHigh').addClass("highlight-icon");
+                }
+                else if (returnedJSON.success && returnedJSON.msg == "Deleted") {
+                    $("#ackHigh").hide();
+                    $("#failHigh").hide();
+                    $('#imgHigh').removeClass("hover-glow");
+                    $('#imgHigh').removeClass("highlight-icon");
+                }
+                else {
+                    $("#failHigh").show();
+                    $("#ackHigh").hide();
+                    return false;
+                }
+            });
+        });
+
+        $('#imgHighish').click(function (e) {
+            $('#imgHighish').addClass("hover-glow");
+            hideAllAck();
+            $.ajax({
+                url: "/Home/SubmitHighish",
+                type: "POST",
+                data: '',
+                beforeSend: function () {
+                    $("#busyHighish").show();
+                }
+            }).done(function (returnedJSON) {
+                $("#busyHighish").hide();
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $("#ackHighish").show();
+                    $("#failHighish").hide();
+                    $('#imgHighish').addClass("highlight-icon");
+                }
+                else if (returnedJSON.success && returnedJSON.msg == "Deleted") {
+                    $("#ackHighish").hide();
+                    $("#failHighish").hide();
+                    $('#imgHighish').removeClass("hover-glow");
+                    $('#imgHighish').removeClass("highlight-icon");
+                }
+                else {
+                    $("#failHighish").show();
+                    $("#ackHighish").hide();
+                    return false;
+                }
+            });
+        });
+
+        $('#imgMedium').click(function (e) {
+            $('#imgMedium').addClass("hover-glow");
+            hideAllAck();
+            $.ajax({
+                url: "/Home/SubmitMedium",
+                type: "POST",
+                data: '',
+                beforeSend: function () {
+                    $("#busyMedium").show();
+                }
+            }).done(function (returnedJSON) {
+                $("#busyMedium").hide();
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $("#ackMedium").show();
+                    $("#failMedium").hide();
+                    $('#imgMedium').addClass("highlight-icon");
+                }
+                else if (returnedJSON.success && returnedJSON.msg == "Deleted") {
+                    $("#ackMedium").hide();
+                    $("#failMedium").hide();
+                    $('#imgMedium').removeClass("hover-glow");
+                    $('#imgMedium').removeClass("highlight-icon");
+                }
+                else {
+                    $("#failMedium").show();
+                    $("#ackMedium").hide();
+                    return false;
+                }
+            });
+        });
+
+        $('#imgLow').click(function (e) {
+            $('#imgLow').addClass("hover-glow");
+            hideAllAck();
+            $.ajax({
+                url: "/Home/SubmitLow",
+                type: "POST",
+                data: '',
+                beforeSend: function () {
+                    $("#busyLow").show();
+                }
+            }).done(function (returnedJSON) {
+                $("#busyLow").hide();
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $("#ackLow").show();
+                    $("#failLow").hide();
+                    $('#imgLow').addClass("highlight-icon");
+                }
+                else if (returnedJSON.success && returnedJSON.msg == "Deleted") {
+                    $("#ackLow").hide();
+                    $("#failLow").hide();
+                    $('#imgLow').removeClass("hover-glow");
+                    $('#imgLow').removeClass("highlight-icon");
+                }
+                else {
+                    $("#failLow").show();
+                    $("#ackLow").hide();
+                    return false;
+                }
+            });
+        });
+
+        $('#imgVeryLow').click(function (e) {
+            $('#imgVeryLow').addClass("hover-glow");
+            hideAllAck();
+            $.ajax({
+                url: "/Home/SubmitVeryLow",
+                type: "POST",
+                data: '',
+                beforeSend: function () {
+                    $("#busyVeryLow").show();
+                }
+            }).done(function (returnedJSON) {
+                $("#busyVeryLow").hide();
+                if (returnedJSON.success && returnedJSON.msg == "Submitted") {
+                    $("#ackVeryLow").show();
+                    $("#failVeryLow").hide();
+                    $('#imgVeryLow').addClass("highlight-icon");
+                }
+                else if (returnedJSON.success && returnedJSON.msg == "Deleted") {
+                    $("#ackVeryLow").hide();
+                    $("#failVeryLow").hide();
+                    $('#imgVeryLow').removeClass("hover-glow");
+                    $('#imgVeryLow').removeClass("highlight-icon");
+                }
+                else {
+                    $("#failVeryLow").show();
+                    $("#ackVeryLow").hide();
+                    return false;
+                }
+            });
+        });
+
+    });
+</script>
+
+<div class="row">
+    
+    @Html.Hidden("hdnPageMode", (object)@ViewBag.PageMode)
+    @Html.Hidden("hdnUserMorale", (object)@ViewBag.UserMoraleForToday)
+  
+    <div class="col-md-6 morale-div" style="text-align: left;">
+        <p>
+            <img alt="High" class="hover-glow" style="height: 154px;" id="imgHigh" src="~/Content/Images/High.png" />
+            <i id="busyHigh" data-toggle="tooltip" data-original-title="Processing. Please wait." class="glyphicon glyphicon-refresh glyphicon-spin statusIcon cchidden tip-right"></i>
+            <i id="ackHigh" data-toggle="tooltip" data-original-title="Thank you" class="glyphicon glyphicon-ok ccGreenColor statusIcon cchidden tip-right"></i>
+            <i id="failHigh" data-toggle="tooltip" data-original-title="Failed to submit morale" class="glyphicon glyphicon-remove ccRedColor statusIcon cchidden tip-right"> </i>
+        </p>
+    </div>
+    
+    <div class="col-md-6 morale-div" style="text-align: -webkit-right;">
+        <p>
+            <img alt="Highish" class="hover-glow" style="height: 154px;" id="imgHighish" src="~/Content/Images/MediumHigh.png" />
+            <i id="busyHighish" data-toggle="tooltip" data-original-title="Processing. Please wait." class="glyphicon glyphicon-refresh glyphicon-spin statusIcon statusicon-right cchidden tip-right"></i>
+            <i id="ackHighish" data-toggle="tooltip" data-original-title="Thank you" class="glyphicon glyphicon-ok ccGreenColor statusIcon statusicon-right cchidden tip-right"></i>
+            <i id="failHighish" data-toggle="tooltip" data-original-title="Failed to submit morale" class="glyphicon glyphicon-remove ccRedColor statusIcon statusicon-right cchidden tip-right"> </i>
+        </p>
+    </div>
+
+    <div class="col-md-12 center-div" style="text-align: -webkit-center;">
+        <p>
+            <img alt="Medium" class="hover-glow" style="height: 154px;" id="imgMedium" src="~/Content/Images/Medium.png" />
+            <i id="busyMedium" data-toggle="tooltip" data-original-title="Processing. Please wait." class="glyphicon glyphicon-refresh glyphicon-spin statusicon-center cchidden tip-right"></i>
+            <i id="ackMedium" data-toggle="tooltip" data-original-title="Thank you" class="glyphicon glyphicon-ok ccGreenColor statusicon-center cchidden tip-right"></i>
+            <i id="failMedium" data-toggle="tooltip" data-original-title="Failed to submit morale" class="glyphicon glyphicon-remove ccRedColor statusicon-center cchidden tip-right"> </i>
+        </p>
+    </div>
+
+    <div class="col-md-6 morale-div" style="text-align: left;">
+        <p>
+            <img alt="Low" class="hover-glow" style="height: 154px;" id="imgLow" src="~/Content/Images/Low.png" />
+            <i id="busyLow" data-toggle="tooltip" data-original-title="Processing. Please wait." class="glyphicon glyphicon-refresh glyphicon-spin statusIcon cchidden tip-right"></i>
+            <i id="ackLow" data-toggle="tooltip" data-original-title="Thank you" class="glyphicon glyphicon-ok ccGreenColor statusIcon cchidden tip-right"></i>
+            <i id="failLow" data-toggle="tooltip" data-original-title="Failed to submit morale" class="glyphicon glyphicon-remove ccRedColor statusIcon cchidden tip-right"> </i>
+        </p>
+    </div>
+
+    <div class="col-md-6 morale-div" style="text-align: -webkit-right;">
+        <p>
+            <img alt="VeryLow" class="hover-glow" style="height: 154px;" id="imgVeryLow" src="~/Content/Images/VeryLow.png" />
+            <i id="busyVeryLow" data-toggle="tooltip" data-original-title="Processing. Please wait." class="glyphicon glyphicon-refresh glyphicon-spin statusIcon statusicon-right cchidden tip-right"></i>
+            <i id="ackVeryLow" data-toggle="tooltip" data-original-title="Thank you" class="glyphicon glyphicon-ok ccGreenColor statusIcon statusicon-right cchidden tip-right"></i>
+            <i id="failVeryLow" data-toggle="tooltip" data-original-title="Failed to submit morale" class="glyphicon glyphicon-remove ccRedColor statusIcon statusicon-right cchidden tip-right"> </i>
+        </p>
+    </div>
+
+</div>
+
+<!-- /ko -->
